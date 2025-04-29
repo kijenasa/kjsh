@@ -8,9 +8,12 @@ enum {
     HASH_HELP = 435,
     HASH_LS = 223,
     HASH_CD = 199,
-    HASH_EXIT = 442,
-    HASH_EMPTY_LINE =  10,
+    HASH_CLEAR = 529,
+    HASH_EXIT = 452,
+    HASH_EMPTY_LINE = 10,
 };
+
+#define CLEAR_SCREEN "\e[1;1H\e[2J"
 
 #define MESSAGE_UNKOWN_COMMAND "UNKOWN COMMAND: %s\n Try \"help\"\n"
 #define MESSAGE_SPLASH "kjsh"
@@ -28,10 +31,14 @@ int kj_help() {
 
     return 0;
 }
+
 // int kj_ls(const char *dir) { return -1; }
 // int kj_cd(const char *dir) { return -1; }
-// int kj_clear() { return -1; }
-// int kj_exit() { return -1; }
+
+int kj_clear() {
+    puts(CLEAR_SCREEN);
+    return 0;
+}
 
 /* IDK WHAT TO CALL THIS SECTION */
 int hash_string(const char *str) {
@@ -58,9 +65,13 @@ int main() {
             case HASH_HELP:
                 kj_ret = kj_help();
                 break;
+            case HASH_CLEAR:
+                kj_ret = kj_clear();
+                break;
+            case HASH_EXIT:
+                exit(EXIT_SUCCESS);
             default:
                 printf(MESSAGE_UNKOWN_COMMAND, line);
-                printf("%d\n", hash_string(line));
                 kj_ret = -1;
             }
         }
