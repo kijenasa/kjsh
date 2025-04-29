@@ -1,13 +1,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int run = 1;
+/* BUILT INS */
+//int kj_help() { return -1; }
+//int kj_ls(const char *dir) { return -1; }
+//int kj_cd(const char *dir) { return -1; }
+//int kj_exit() { return -1; }
 
+/* ENTRY */
 int main() {
-    while(run) {
-        char c = getc(stdin);
-        if(c == 'q')
-            run = 0;
+    while(1) {
+        char line[2048];
+        if(fgets(line, sizeof(line), stdin)) {
+            printf("YOU ENTERED %s\n", line);
+        }
     }
     return EXIT_SUCCESS;
 }
