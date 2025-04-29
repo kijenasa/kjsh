@@ -1,6 +1,6 @@
 CC=gcc
 OUT_NAME=kjsh
-CC_OPTIONS=-o ${OUT_NAME} -std=c99 -wall -wextra -werror
+CC_OPTIONS=-o ${OUT_NAME} -std=c99 -Wall -Wextra -Werror
 DESTDIR=/usr/local/bin
 BINNAME=brainfuck
 
