@@ -1,0 +1,15 @@
+#include "hash.h"
+
+#ifdef DEBUG
+#include <stdio.h>
+#endif
+
+int hash_string(const char *str) {
+    int sum = 0;
+    for(int i = 0; str[i] != '\0'; i++)
+        sum += (int)str[i] * i;
+#ifdef DEBUG
+    printf("Hash: %d\n", sum);
+#endif
+    return sum;
+}

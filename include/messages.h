@@ -9,8 +9,6 @@
 #define MESSAGE_HELP                                                                                                   \
     "Built in commands:\n\
     help\n\
-    ls\n\
-    cd\n\
     exit\n"
 
 #endif

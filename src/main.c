@@ -3,29 +3,10 @@
 
 #include "builtins/clear.h"
 #include "builtins/help.h"
-
 #include "messages.h"
+#include "hash.h"
 
-/* MACROS ENUMS */
 
-enum {
-    HASH_HELP = 435,
-    HASH_LS = 223,
-    HASH_CD = 199,
-    HASH_CLEAR = 529,
-    HASH_EXIT = 452,
-    HASH_EMPTY_LINE = 10,
-};
-
-int hash_string(const char *str) {
-    int sum = 0;
-    for(int i = 0; str[i] != '\0'; i++)
-        sum += (int)str[i];
-
-    return sum;
-}
-
-/* ENTRY */
 int main() {
     char line[2048];
     int kj_ret;
