@@ -1,0 +1,53 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-o",
+      "kjsh",
+      "src/builtins/clear.c"
+    ],
+    "directory": "/home/julian/Documents/c/kjsh",
+    "file": "/home/julian/Documents/c/kjsh/src/builtins/clear.c",
+    "output": "/home/julian/Documents/c/kjsh/kjsh"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-o",
+      "kjsh",
+      "src/builtins/help.c"
+    ],
+    "directory": "/home/julian/Documents/c/kjsh",
+    "file": "/home/julian/Documents/c/kjsh/src/builtins/help.c",
+    "output": "/home/julian/Documents/c/kjsh/kjsh"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-o",
+      "kjsh",
+      "src/main.c"
+    ],
+    "directory": "/home/julian/Documents/c/kjsh",
+    "file": "/home/julian/Documents/c/kjsh/src/main.c",
+    "output": "/home/julian/Documents/c/kjsh/kjsh"
+  }
+]

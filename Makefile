@@ -1,13 +1,17 @@
 CC=gcc
 OUT_NAME=kjsh
-CC_OPTIONS=-o ${OUT_NAME} -std=c99 -Wall -Wextra -Werror
+CFLAGS=-o ${OUT_NAME} -std=c99 -Wall -Wextra -Werror -Iinclude
+SOURCE=$(shell find src -name '*.c')
 DESTDIR=/usr/local/bin
 BINNAME=brainfuck
 
 all: build
 
-build: main.c
-	${CC} ${CC_OPTIONS} main.c
+build: src/*
+	${CC} ${CFLAGS} ${SOURCE}
+
+debug: src/*
+	${CC} ${CFLAGS} -DDEBUG ${SOURCE}
 
 clean: 
 	rm ${OUT_NAME}

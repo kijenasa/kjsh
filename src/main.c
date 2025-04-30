@@ -1,6 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "builtins/clear.h"
+#include "builtins/help.h"
+
+#include "messages.h"
+
 /* MACROS ENUMS */
 
 enum {
@@ -12,34 +17,6 @@ enum {
     HASH_EMPTY_LINE = 10,
 };
 
-#define CLEAR_SCREEN "\e[1;1H\e[2J"
-
-#define MESSAGE_UNKOWN_COMMAND "UNKOWN COMMAND: %s\n Try \"help\"\n"
-#define MESSAGE_SPLASH "kjsh"
-#define MESSAGE_HELP                                                                                                   \
-    "Built in commands:\n\
-    help\n\
-    ls\n\
-    cd\n\
-    exit\n"
-
-/* BUILT INS */
-int kj_help() {
-    puts(MESSAGE_SPLASH);
-    puts(MESSAGE_HELP);
-
-    return 0;
-}
-
-// int kj_ls(const char *dir) { return -1; }
-// int kj_cd(const char *dir) { return -1; }
-
-int kj_clear() {
-    puts(CLEAR_SCREEN);
-    return 0;
-}
-
-/* IDK WHAT TO CALL THIS SECTION */
 int hash_string(const char *str) {
     int sum = 0;
     for(int i = 0; str[i] != '\0'; i++)
