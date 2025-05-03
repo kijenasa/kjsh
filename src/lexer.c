@@ -20,6 +20,7 @@ static struct token get_token_command(char *word) {
     case HASH_CLEAR:
     case HASH_EXIT:
         type = BUILTIN;
+        break;
     default:
         type = EXTERN;
     }
