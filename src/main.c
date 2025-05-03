@@ -5,7 +5,7 @@
 #include "builtins/help.h"
 #include "messages.h"
 #include "hash.h"
-
+#include "config.h"
 
 int main() {
     char line[2048];
