@@ -4,9 +4,14 @@
 #include <string.h>
 #include "config.h"
 #include "hash.h"
+#include "env.h"
 
-struct token get_token_command(char *word) {
+static struct token get_token_command(char *word) {
     enum token_type type;
+
+    if(word[0] == '$')
+        word = get_environment_variable(&word[1]);
+
     char *value = malloc(strlen(word));
     strcpy(value, word);
 
@@ -22,7 +27,17 @@ struct token get_token_command(char *word) {
     return (struct token){type, value};
 }
 
-struct token get_token_argument(char *word);
+static struct token get_token_argument(char *word) {
+    enum token_type type = ARGUMENT;
+
+    if(word[0] == '$')
+        word = get_environment_variable(&word[1]);
+
+    char *value = malloc(strlen(word));
+    strcpy(value, word);
+
+    return (struct token){type, value};
+}
 
 struct token *tokenize_line(char *line) {
     int len = 1;
