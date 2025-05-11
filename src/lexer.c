@@ -1,5 +1,6 @@
 #include "lexer.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "config.h"
@@ -15,7 +16,7 @@ static struct token get_token_command(char *word) {
     char *value = malloc(strlen(word));
     strcpy(value, word);
 
-    switch(hash_string(word)) {
+    switch(hash_string(word)) { // TODO make this a function
     case HASH_HELP:
     case HASH_CLEAR:
     case HASH_EXIT:
@@ -42,12 +43,12 @@ static struct token get_token_argument(char *word) {
 
 struct token *tokenize_line(char *line) {
     int len = 1;
-    for(int i = 0;; i++) {
+    for(int i = 0; line[i] != '\0'; i++) {
         if(line[i] == ' ')
             len += 1;
     }
 
-    struct token *tokens = malloc(sizeof(struct token) * len);
+    struct token *tokens = malloc(sizeof(struct token) * (len + 1));
 
     char *word = strtok(line, " ");
 
@@ -57,5 +58,26 @@ struct token *tokenize_line(char *line) {
         word = strtok(NULL, " ");
     }
 
+    tokens[len] = (struct token){END, NULL};
+
     return tokens;
+}
+
+/* NOTE:
+ * Doing it like this defeats the point of using a lexer almost interiely
+ * (the only benefit of it now is environment varialbes)
+ * however it is kept like this for future updates.
+ */
+char **detokenize_line(struct token *tokens) {
+    int argc = 0;
+    while(tokens[argc].type != END)
+        argc++;
+
+    char **argv = malloc(sizeof(char *) * argc);
+
+    for(int i = 0; i < argc; i++)
+        argv[i] = tokens[i].data;
+
+    free(tokens);
+    return argv;
 }
