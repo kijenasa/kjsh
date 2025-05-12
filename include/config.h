@@ -1,14 +1,14 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define ENVIRONMENT_VARIABLE_TABLE_SIZE 1024
+#define ENVIRONMENT_VARIABLE_TABLE_SIZE 2048
 
 // Builtin hash definitions
 enum {
-    HASH_HELP = 693,
-    HASH_CLEAR = 1107,
-    HASH_EXPORT = 1,
-    HASH_EXIT = 718,
+    HASH_HELP = 1078,
+    HASH_CLEAR = 1576,
+    HASH_EXPORT = 2387,
+    HASH_EXIT = 1120,
     HASH_EMPTY_LINE = 0,
 };
 
