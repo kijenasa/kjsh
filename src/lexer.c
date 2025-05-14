@@ -54,8 +54,8 @@ struct token *tokenize_line(char *line) {
 
     tokens[0] = get_token_command(word);
     for(int i = 1; word != NULL; i++) {
-        tokens[i] = get_token_argument(word);
         word = strtok(NULL, " ");
+        tokens[i] = get_token_argument(word);
     }
 
     tokens[len] = (struct token){END, NULL};
@@ -75,8 +75,9 @@ char **detokenize_line(struct token *tokens) {
 
     char **argv = malloc(sizeof(char *) * argc);
 
-    for(int i = 0; i < argc; i++)
+    for(int i = 0; i < argc; i++) {
         argv[i] = tokens[i].data;
+    }
 
     free(tokens);
     return argv;
