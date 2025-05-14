@@ -11,7 +11,7 @@ int hash_string(const char *str) {
             sum += (int)str[i] * (i + 1);
     }
 #ifdef DEBUG
-    printf("Hash: %d\n", sum);
+    printf("Hash for \"%s\": %d\n", str, sum);
 #endif
     return sum;
 }

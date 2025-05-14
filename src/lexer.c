@@ -26,17 +26,25 @@ static struct token get_token_command(char *word) {
         type = EXTERN;
     }
 
+#ifdef DEBUG
+    printf("TOKEN COMMAND: %s\n", value);
+#endif
+
     return (struct token){type, value};
 }
 
 static struct token get_token_argument(char *word) {
     enum token_type type = ARGUMENT;
 
-    if(word[0] == '$')
+    if(word[0] == '$') // SEGFAULT HERE
         word = get_environment_variable(&word[1]);
 
     char *value = malloc(strlen(word));
     strcpy(value, word);
+
+#ifdef DEBUG
+    printf("TOKEN ARGUMENT: %s\n", value);
+#endif
 
     return (struct token){type, value};
 }
@@ -48,14 +56,25 @@ struct token *tokenize_line(char *line) {
             len += 1;
     }
 
+#ifdef DEBUG
+    printf("TOKENIZE_LINE LEN: %d\n", len);
+#endif
+
     struct token *tokens = malloc(sizeof(struct token) * (len + 1));
 
     char *word = strtok(line, " ");
 
     tokens[0] = get_token_command(word);
-    for(int i = 1; word != NULL; i++) {
+    for(int i = 1; i < len; i++) {
         word = strtok(NULL, " ");
-        tokens[i] = get_token_argument(word);
+        if(word != NULL) {
+#ifdef DEBUG
+            printf("TOKENIZE_LINE GETTING TOKEN FOR INDEX %d\n", i);
+#endif
+            tokens[i] = get_token_argument(word);
+        } else {
+            break;
+        }
     }
 
     tokens[len] = (struct token){END, NULL};
@@ -66,10 +85,10 @@ struct token *tokenize_line(char *line) {
 /* NOTE:
  * Doing it like this defeats the point of using a lexer almost interiely
  * (the only benefit of it now is environment varialbes)
- * however it is kept like this for future updates.
+ * however it is kept like this for future updates to the lexer.
  */
 char **detokenize_line(struct token *tokens) {
-    int argc = 0;
+    int argc = 1;
     while(tokens[argc].type != END)
         argc++;
 

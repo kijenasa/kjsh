@@ -7,9 +7,11 @@
 #include "builtins/export.h"
 #include "builtins/help.h"
 #include "builtins/exit.h"
+#include "lexer.h"
 
 // get_builtin(char *command) -> builtin(int argc, char *argv[])
 static int (*get_builtin(char *command))(int, char *[]) {
+    printf("GETTING BUILTIN FOR \"%s\"\n", command);
     int (*builtin)(int, char *[]) = NULL;
 
     int input_hash = hash_string(command);
@@ -43,7 +45,6 @@ static int (*get_builtin(char *command))(int, char *[]) {
  * if found, idk execute it
  */
 int execute(struct token *tokens) {
-    puts("EXECUTE ENTER");
     int argc = 0;
     while(tokens[argc].type != END)
         argc++;
@@ -51,9 +52,10 @@ int execute(struct token *tokens) {
     struct token command_name = tokens[0];
     int (*command)(int, char *[]);
     command = get_builtin(command_name.data);
+    char **argv = detokenize_line(tokens);
     
     if(command != NULL) {
-        command(argc, NULL);
+        command(argc, argv);
     }
 
     (void)tokens;

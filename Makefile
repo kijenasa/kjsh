@@ -11,7 +11,7 @@ build: src/*
 	${CC} ${CFLAGS} ${SOURCE}
 
 debug: src/*
-	${CC} ${CFLAGS} -DDEBUG ${SOURCE}
+	${CC} ${CFLAGS} -DDEBUG -g ${SOURCE}
 
 clean: 
 	rm ${OUT_NAME}
