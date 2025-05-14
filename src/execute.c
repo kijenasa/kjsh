@@ -11,7 +11,6 @@
 
 // get_builtin(char *command) -> builtin(int argc, char *argv[])
 static int (*get_builtin(char *command))(int, char *[]) {
-    printf("GETTING BUILTIN FOR \"%s\"\n", command);
     int (*builtin)(int, char *[]) = NULL;
 
     int input_hash = hash_string(command);
