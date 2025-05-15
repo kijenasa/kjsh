@@ -11,5 +11,5 @@ int kj_export(int argc, char *argv[]) {
 
     name = argv[1];
     value = argv[2];
-    return add_environment_variable(name, value);
+    return set_environment_variable(name, value);
 }

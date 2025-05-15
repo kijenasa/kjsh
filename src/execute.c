@@ -1,6 +1,10 @@
 #include "execute.h"
 
+#include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "hash.h"
 #include "config.h"
 #include "builtins/clear.h"
@@ -40,6 +44,21 @@ static int (*get_builtin(char *command))(int, char *[]) {
 
     return builtin;
 }
+
+//int run_external(char *path, char *argv[]) {
+//    // NOTE: final element in argv must be NULL
+//
+//    pid_t pid = fork();
+//    int status;
+//    if(pid < 0) {
+//        perror("Failed to fork()");
+//    } else if(pid == 0) {
+//        execvp(argv[0], argv);
+//    } else {
+//        waitpid(pid, &status, 0);
+//        return WEXITSTATUS(status);
+//    }
+//}
 
 /*
  * Turn tokens data into argc argv format
