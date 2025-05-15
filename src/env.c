@@ -1,12 +1,14 @@
 #include "env.h"
 
 #include <stdlib.h>
+#ifdef DEBUG
 #include <stdio.h>
+#endif
 #include <string.h>
 #include "hash.h"
 #include "config.h"
 
-char *env_table[ENVIRONMENT_VARIABLE_TABLE_SIZE] = {0};
+char *env_table[ENVIRONMENT_VARIABLE_TABLE_SIZE] = {NULL};
 
 // TODO: Handle collisions
 

@@ -13,8 +13,11 @@ static struct token get_token_command(char *word) {
     if(word[0] == '$')
         word = get_environment_variable(&word[1]);
 
-    char *value = malloc(strlen(word));
-    strcpy(value, word);
+    char *value = "\0";
+    if(word != NULL) {
+        value = malloc(strlen(word));
+        strcpy(value, word);
+    }
 
     switch(hash_string(word)) { // TODO make this a function
     case HASH_HELP:
@@ -36,11 +39,14 @@ static struct token get_token_command(char *word) {
 static struct token get_token_argument(char *word) {
     enum token_type type = ARGUMENT;
 
-    if(word[0] == '$') // SEGFAULT HERE
+    if(word[0] == '$')
         word = get_environment_variable(&word[1]);
 
-    char *value = malloc(strlen(word));
-    strcpy(value, word);
+    char *value = "\0";
+    if(word != NULL) {
+        value = malloc(strlen(word));
+        strcpy(value, word);
+    }
 
 #ifdef DEBUG
     printf("TOKEN ARGUMENT: %s\n", value);
