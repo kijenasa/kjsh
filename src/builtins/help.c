@@ -3,7 +3,6 @@
 #include "config.h"
 #include <stdio.h>
 
-/* BUILT INS */
 int kj_help(int argc, char *argv[]) {
     (void)argc;
     (void)argv;

@@ -5,6 +5,7 @@
 #include "config.h"
 #include "builtins/clear.h"
 #include "builtins/export.h"
+#include "builtins/say.h"
 #include "builtins/help.h"
 #include "builtins/exit.h"
 #include "lexer.h"
@@ -25,6 +26,9 @@ static int (*get_builtin(char *command))(int, char *[]) {
         break;
     case HASH_EXPORT:
         builtin = &kj_export;
+        break;
+    case HASH_SAY:
+        builtin = &kj_say;
         break;
     case HASH_EXIT:
         builtin = &kj_exit;
@@ -52,7 +56,7 @@ int execute(struct token *tokens) {
     int (*command)(int, char *[]);
     command = get_builtin(command_name.data);
     char **argv = detokenize_line(tokens);
-    
+
     if(command != NULL) {
         command(argc, argv);
     }

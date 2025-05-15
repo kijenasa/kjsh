@@ -8,6 +8,7 @@ enum {
     HASH_HELP = 1078,
     HASH_CLEAR = 1576,
     HASH_EXPORT = 2387,
+    HASH_SAY = 672,
     HASH_EXIT = 1120,
     HASH_EMPTY_LINE = 0,
 };
