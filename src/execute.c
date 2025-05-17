@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "env.h"
 #include "hash.h"
 #include "config.h"
 #include "builtins/clear.h"
@@ -39,26 +40,28 @@ static int (*get_builtin(char *command))(int, char *[]) {
         break;
     default:
         break;
-        // TODO: kj_unknown()
+        // TODO: kj_unknown().
     }
 
     return builtin;
 }
 
-//int run_external(char *path, char *argv[]) {
-//    // NOTE: final element in argv must be NULL
-//
-//    pid_t pid = fork();
-//    int status;
-//    if(pid < 0) {
-//        perror("Failed to fork()");
-//    } else if(pid == 0) {
-//        execvp(argv[0], argv);
-//    } else {
-//        waitpid(pid, &status, 0);
-//        return WEXITSTATUS(status);
-//    }
-//}
+int run_external(char *argv[]) {
+    int ret;
+    pid_t pid = fork();
+    if(pid < 0) {
+        ret = -1;
+        perror("Failed to fork");
+    } else if(pid == 0) { // External process
+        ret = execvp(argv[0], argv);
+    } else { // Shell process
+        int status;
+        waitpid(pid, &status, 0);
+        ret = WEXITSTATUS(status);
+    }
+
+    return ret;
+}
 
 /*
  * Turn tokens data into argc argv format
@@ -67,8 +70,9 @@ static int (*get_builtin(char *command))(int, char *[]) {
  * if found, idk execute it
  */
 int execute(struct token *tokens) {
+    int ret;
     int argc = 0;
-    while(tokens[argc].type != END)
+    while(tokens[argc].data != NULL)
         argc++;
 
     struct token command_name = tokens[0];
@@ -77,9 +81,18 @@ int execute(struct token *tokens) {
     char **argv = detokenize_line(tokens);
 
     if(command != NULL) {
-        command(argc, argv);
+        ret = command(argc, argv);
+    } else {
+        ret = run_external(argv);
     }
 
-    (void)tokens;
-    return -1;
+    char str_ret[3] = {0};
+    sprintf(str_ret, "%d", ret);
+    set_environment_variable("KJ_RET", str_ret);
+
+#ifdef DEBUG
+    printf("EXECUTE() RETURNING %d", ret);
+#endif
+
+    return ret;
 }

@@ -5,7 +5,6 @@ enum token_type {
     BUILTIN,
     EXTERN,
     ARGUMENT,
-    END,
 };
 
 struct token {

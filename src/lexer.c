@@ -83,7 +83,7 @@ struct token *tokenize_line(char *line) {
         }
     }
 
-    tokens[len] = (struct token){END, NULL};
+    tokens[len] = (struct token){ARGUMENT, NULL}; // Null terminate
 
     return tokens;
 }
@@ -95,7 +95,7 @@ struct token *tokenize_line(char *line) {
  */
 char **detokenize_line(struct token *tokens) {
     int argc = 1;
-    while(tokens[argc].type != END)
+    while(tokens[argc].data != NULL)
         argc++;
 
     char **argv = malloc(sizeof(char *) * argc);
