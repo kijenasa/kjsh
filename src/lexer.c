@@ -19,7 +19,7 @@ static struct token get_token_command(char *word) {
         strcpy(value, word);
     }
 
-    switch(hash_string(word)) { // TODO make this a function
+    switch(hash_string(word)) {
     case HASH_HELP:
     case HASH_CLEAR:
     case HASH_EXIT:

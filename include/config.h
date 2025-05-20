@@ -9,6 +9,7 @@ enum {
     HASH_CLEAR = 1576,
     HASH_EXPORT = 2387,
     HASH_SAY = 672,
+    HASH_CD = 299,
     HASH_EXIT = 1120,
     HASH_EMPTY_LINE = 0,
 };

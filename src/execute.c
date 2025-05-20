@@ -13,6 +13,7 @@
 #include "builtins/say.h"
 #include "builtins/help.h"
 #include "builtins/exit.h"
+#include "builtins/cd.h"
 #include "lexer.h"
 
 // get_builtin(char *command) -> builtin(int argc, char *argv[])
@@ -20,7 +21,7 @@ static int (*get_builtin(char *command))(int, char *[]) {
     int (*builtin)(int, char *[]) = NULL;
 
     int input_hash = hash_string(command);
-    switch(input_hash) { // TODO: consider function pointers
+    switch(input_hash) {
     case HASH_EMPTY_LINE:
         break;
     case HASH_HELP:
@@ -34,6 +35,9 @@ static int (*get_builtin(char *command))(int, char *[]) {
         break;
     case HASH_SAY:
         builtin = &kj_say;
+        break;
+    case HASH_CD:
+        builtin = &kj_cd;
         break;
     case HASH_EXIT:
         builtin = &kj_exit;
