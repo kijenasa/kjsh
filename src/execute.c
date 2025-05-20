@@ -1,6 +1,5 @@
 #include "execute.h"
 
-#include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -8,7 +7,6 @@
 #include "env.h"
 #include "hash.h"
 #include "config.h"
-#include "builtins/clear.h"
 #include "builtins/export.h"
 #include "builtins/say.h"
 #include "builtins/help.h"
@@ -26,9 +24,6 @@ static int (*get_builtin(char *command))(int, char *[]) {
         break;
     case HASH_HELP:
         builtin = &kj_help;
-        break;
-    case HASH_CLEAR:
-        builtin = &kj_clear;
         break;
     case HASH_EXPORT:
         builtin = &kj_export;
