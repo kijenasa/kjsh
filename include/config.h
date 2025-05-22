@@ -25,4 +25,6 @@ enum {
     help\n\
     exit\n"
 
+#define HISTORY_PATH ".kjhist"
+
 #endif
