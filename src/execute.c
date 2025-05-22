@@ -52,11 +52,16 @@ int run_external(char *argv[]) {
         ret = -1;
         perror("Failed to fork");
     } else if(pid == 0) { // External process
-        ret = execvp(argv[0], argv);
+        execvp(argv[0], argv);
+        _exit(127);
     } else { // Shell process
         int status;
         waitpid(pid, &status, 0);
-        ret = WEXITSTATUS(status);
+
+        if(WIFEXITED(status))
+            ret = WEXITSTATUS(status);
+        else 
+            ret = -1;
     }
 
     return ret;
