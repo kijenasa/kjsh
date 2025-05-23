@@ -8,6 +8,10 @@
 #include "env.h"
 
 static struct token get_token_command(char *word) {
+    if(word == NULL) {
+        return (struct token){ARGUMENT, NULL};
+    }
+
     enum token_type type;
 
     if(word[0] == '$')
@@ -37,12 +41,16 @@ static struct token get_token_command(char *word) {
 }
 
 static struct token get_token_argument(char *word) {
+    if(word == NULL) {
+        return (struct token){ARGUMENT, NULL};
+    }
+
     enum token_type type = ARGUMENT;
+    char *value = "\0";
 
     if(word[0] == '$')
         word = get_environment_variable(&word[1]);
 
-    char *value = "\0";
     if(word != NULL) {
         value = malloc(strlen(word));
         strcpy(value, word);
