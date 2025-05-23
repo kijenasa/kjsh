@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define ENVIRONMENT_VARIABLE_TABLE_SIZE 2048
+#define LINE_LENGTH 2048
 
 // Builtin hash definitions
 enum {

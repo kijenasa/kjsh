@@ -3,7 +3,7 @@
 
 int init_history();
 
-char *get_history(int index);
+int get_history(int index, char *line);
 
 int add_history(char *line);
 

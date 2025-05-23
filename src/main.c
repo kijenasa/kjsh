@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "config.h"
 #include "lexer.h"
 #include "execute.h"
 #include "history.h"
 
 int main() {
-    char line[2048];
+    char line[LINE_LENGTH];
     if(init_history() != 0) {
         perror("Failed to initialize history");
     }

@@ -1,5 +1,6 @@
 #include "history.h"
 
+#include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "config.h"
@@ -14,13 +15,22 @@ int init_history() { // TODO: fix history being reset every time
     fhistory = fopen(path, "a");
 
     if(fhistory == NULL)
-        return -1; 
+        return -1;
 
     return 0;
 }
 
-char *get_history(int index);
+int get_history(int index, char *line) {
+    int i = 0;
+    while(fgets(line, sizeof(line), fhistory)) {
+        if(i == index)
+            break;
+        i++;
+    }
 
-int add_history(char *line) {
-    return fputs(line, fhistory);
+    return 0;
 }
+
+int close_history() { return fclose(fhistory); }
+
+int add_history(char *line) { return fputs(line, fhistory); }
