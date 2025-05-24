@@ -10,6 +10,7 @@
 #include "builtins/export.h"
 #include "builtins/say.h"
 #include "builtins/help.h"
+#include "builtins/run.h"
 #include "builtins/exit.h"
 #include "builtins/cd.h"
 #include "lexer.h"
@@ -33,6 +34,9 @@ static int (*get_builtin(char *command))(int, char *[]) {
         break;
     case HASH_CD:
         builtin = &kj_cd;
+        break;
+    case HASH_RUN:
+        builtin = &kj_run;
         break;
     case HASH_EXIT:
         builtin = &kj_exit;

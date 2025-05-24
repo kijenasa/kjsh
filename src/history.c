@@ -7,7 +7,7 @@
 
 FILE *fhistory;
 
-int init_history() { // TODO: fix history being reset every time
+int init_history() {
     char *home = getenv("HOME");
     char path[1024];
     sprintf(path, "%s/%s", home, HISTORY_PATH);

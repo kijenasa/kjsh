@@ -10,6 +10,7 @@ enum {
     HASH_EXPORT = 2387,
     HASH_SAY = 672,
     HASH_CD = 299,
+    HASH_RUN = 678,
     HASH_EXIT = 1120,
     HASH_EMPTY_LINE = 0,
 };
@@ -25,6 +26,8 @@ enum {
     help\n\
     exit\n"
 
+// Files
 #define HISTORY_PATH ".kjhist"
+#define INIT_PATH ".kjinit"
 
 #endif

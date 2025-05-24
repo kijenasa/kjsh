@@ -4,6 +4,7 @@
 #include "lexer.h"
 #include "execute.h"
 #include "history.h"
+#include "script.h"
 
 int main() {
     char line[LINE_LENGTH];
@@ -11,11 +12,13 @@ int main() {
         perror("Failed to initialize history");
     }
 
+    run_init();
+
     while(1) {
         printf("$ "); // TODO: more complete prompt with env var support
         if(fgets(line, sizeof(line), stdin)) {
             add_history(line);
-            for(int i = 0; i < 2048; i++){
+            for(int i = 0; i < LINE_LENGTH; i++){
                 if(line[i] == '\n')
                     line[i] = '\0';
             }
