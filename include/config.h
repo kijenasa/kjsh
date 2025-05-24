@@ -24,6 +24,11 @@ enum {
 #define MESSAGE_HELP                                                                                                   \
     "Built in commands:\n\
     help\n\
+    clear\n\
+    export\n\
+    say\n\
+    cd\n\
+    run\n\
     exit\n"
 
 // Files
